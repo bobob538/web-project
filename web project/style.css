@@ -1,0 +1,13 @@
+body{
+    padding:50px ;
+}
+.container{
+    max-width: 600px; 
+    margin: 0 auto;
+    padding: 50px;
+    box-shadow: dimgrey 0px 7px 29px 0px;
+}
+.form-gruop{
+    margin-bottom: 30px;
+}
+
