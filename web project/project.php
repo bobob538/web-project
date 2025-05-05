@@ -23,7 +23,7 @@ $Password = $_POST["Password"];
 $PasswordRepeat = $_POST["Repeat_Password"];
 $phone = $_POST["phone"];
 $city = $_POST["city"];
-$Password_Hash =password_hash($Password,PASSWORD_DEFAULT);
+$Password_Hash = password_hash($Password,PASSWORD_DEFAULT);
 
 $errors = array();//empty bo zaniny away ka hamu fieldakan prkrawnatawa yan na
 if (empty($fullname) or empty($email) or empty($Password) or empty($PasswordRepeat) or empty($phone) or empty($city)){
@@ -39,9 +39,9 @@ array_push($errors,"password must be 8 charecters long enogh");
 if ($Password!==$PasswordRepeat) {//boi bzanin passwordaka yaksana yan na
 array_push($errors,"password does not match");
 }
-require_once "dabase.php";
+require_once "database.php";
 $sql ="SELECT * FROM users WHERE email ='$email'";//boi emaly dubara war nagret
-$result = mysqli_query($coon, $sql);
+$result = mysqli_query($conn, $sql);
 $rowCount = mysqli_num_rows($result);
 if ($rowCount) {
    array_push($errors,"Email already exists!");
@@ -57,12 +57,16 @@ else{
    //we will insert the data into database
  
    $sql ="INSERT INTO users (full_name, email, password, phone, city)VALUES (?,?,?,?,?)";//($fullname, $email, $Password, $phone, $city) amashian akret bas bo sql injection asantra shkani
-$stmt = mysqli_stmt_init($coon);
+$stmt = mysqli_stmt_init($conn);
 $preparestmt = mysqli_stmt_prepare($stmt,$sql);
 if ($preparestmt) {
    mysqli_stmt_bind_param($stmt,"sssss", $fullname, $email, $Password_Hash, $phone, $city);
    mysqli_stmt_execute($stmt);
-   echo "<div class ='alert alert-success'>you are regestered successfuly.</div>";
+  // echo "<div class ='alert alert-success'>you are regestered successfuly.</div>";
+  echo "<div class='alert alert-success'>You are registered successfully. Redirecting to login...</div>";
+  header("refresh: 2; url=login.php");// Redirect after 2 seconds
+  exit(); 
+
 }
 else {
    die("somthing went worng 2");
