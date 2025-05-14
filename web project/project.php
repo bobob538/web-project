@@ -25,7 +25,8 @@ $phone = $_POST["phone"];
 $city = $_POST["city"];
 $Password_Hash = password_hash($Password,PASSWORD_DEFAULT);
 
-$errors = array();//empty bo zaniny away ka hamu fieldakan prkrawnatawa yan na
+$errors = array();
+//empty bo zaniny away ka hamu fieldakan prkrawnatawa yan na
 if (empty($fullname) or empty($email) or empty($Password) or empty($PasswordRepeat) or empty($phone) or empty($city)){
 array_push($errors,"all fields are required");
 }
@@ -96,6 +97,9 @@ else {
          </div>
          <div class="form-btn">
             <input type="submit" class="btn btn-primary" value="Resister" name="submit" > 
+        
+         <div class="form-gruop">
+            <p>Already have an account? <a href="login.php">Login here</a></p>
          </div>
     </form>
 </div>

@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 // Fetch user data
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT full_name, email, phone, city FROM users WHERE ID = ?"; // Match your table's "ID" column
